@@ -180,3 +180,7 @@ Add to package.json
 pipelines file maybe needs to be changed (not sure)
 
 test piublishing and building/deploying - sorry dont know instructions
+
+## Issues
+
+eslint - include exclusion of inferred types on anonymous functions

@@ -1,44 +1,117 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is guide for day 4 of component library build 
 
-## Available Scripts
+## Add testing
 
-In the project directory, you can run:
+```
+npm I -D @types/react
+npm i -D jest ts-jest @types/jest @testing-library/jest-dom @testing-library/react identity-obj-proxy
+```
 
-### `npm start`
+Copy from RAW
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+jest.config.js
+jest.setup.js
+tsconfig.json
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Add `src` folder
 
-### `npm test`
+Alter test script in package.json to “jest —passWithNoTests”
+Add to scripts 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+"test:watch": "jest --watchAll",
+"test:watch": "jest --passWithNoTests --watchAll",
 
-### `npm run build`
+Now run “npm run test” (if run fails, close code and restart)
+Now run (in another terminal) “npm run test:watch” - keep this running and restart it if you have to restart 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+———————————
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Add build
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+npm i -D @babel/core @rollup/plugin-commonjs @rollup/plugin-node-resolve babel-loader babel-preset-react-app rollup rollup-plugin-copy rollup-plugin-peer-deps-external rollup-plugin-sass rollup-plugin-typescript2 sass-loader
 
-### `npm run eject`
+Add to package.json
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  "module": "build/index.esm.js",
+  "files": [
+    "build"
+  ],
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Add to scripts    "build": "rollup -c",
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Add rollup.config.js
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Add empty index.ts in src folder
 
-## Learn More
+Now run “npm run build” (if run fails, close code and restart)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+———————————
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Add storybook & static
+
+npm i -D @storybook/react 
+
+Create folder .storybook
+
+Add main.js
+
+Add to scripts
+
+    "storybook": "start-storybook -p 6006",
+    "storybook:export": "build-storybook",
+
+Add to .gitignore
+
+storybook-static/
+
+Now run “npm run storybook” (if run fails, close code and restart)
+Now run “npm run storybook:static”
+
+———————————
+
+Now add util generate
+
+Copy over util folder (and check each file and save)
+
+Add to scripts
+
+"generate": "node ./util/create-component"
+
+Add files
+
+typography.scss
+variables.scss
+
+———————————
+
+Now create a component
+
+Now run “npm run generate TestButton1”
+
+** the code created does not meet slinging rules we have decided upon, so the temp[lates should be changed at this stage)
+
+Change index.ts to
+
+import TestButton1 from './TestButton1/TestButton1';
+export { TestButton1 };
+
+Tests should continue to run and pass
+
+Now run “npm run storybook”
+
+———————————
+
+Now add npm package registration and pipelines
+
+Add file .npmrc
+
+Add to package.json
+
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+
+

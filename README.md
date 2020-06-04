@@ -121,7 +121,8 @@ storybook-static/
 ```
 
 Now run `npm run storybook` (if run fails, close code and restart)
-Now run `npm run storybook:static`
+
+Now run `npm run storybook:export`
 
 ## Now add util generate
 

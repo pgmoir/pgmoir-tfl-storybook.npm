@@ -3,7 +3,7 @@ This is guide for day 4 of component library build
 ## Add testing
 
 ```
-npm I -D @types/react
+npm i -D @types/react
 npm i -D jest ts-jest @types/jest @testing-library/jest-dom @testing-library/react identity-obj-proxy
 ```
 
